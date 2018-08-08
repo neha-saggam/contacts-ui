@@ -38,7 +38,7 @@ export class Contacts extends React.Component {
     this.setContactForEdit = this.setContactForEdit.bind(this);
   }
 
-  setContactForEdit(contact) {
+  setContactForEdit(contact, mode) {
     this.setState({
       contact: {...contact},
       mode: mode

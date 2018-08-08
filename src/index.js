@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Collection, CollectionItem, Icon, Col, Row, Modal, Button, Input} from 'react-materialize';
 import { NavBar } from './components/NavBar';
 import { Contacts } from './components/Contacts';
+import "./index.css"
 
 class Index extends React.Component {
 
@@ -13,7 +14,8 @@ class Index extends React.Component {
       <div className="content">
       <Contacts />
       </div>
-    </div>);
+    </div>
+    );
   }
 }
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Navbar, NavItem, Collection, CollectionItem, Icon, Col, Row, Modal, Button, Input} from 'react-materialize';
 
 export function ContactList(props) {
-  const { contacts, mode } = props;
+  const { contacts, mode, setContactForEdit, deleteContact } = props;
   const contactItems = contacts.map((contact, index) =>
   <CollectionItem key={index}>
     <Row className='center'>
@@ -21,13 +21,13 @@ export function ContactList(props) {
     </Col>
     <Col s={1}>
     <a onClick={(e) => {
-      this.props.setContactForEdit(contact);
+      setContactForEdit(contact, mode);
       $('#addEditContactModal').modal('open')
     }}>
     <Icon>edit</Icon></a>
     </Col>
     <Col s={1}>
-      <a onClick={(e) => this.props.deleteContact(contact.id, e)}><Icon>delete</Icon></a>
+      <a onClick={(e) => deleteContact(contact.id, e)}><Icon>delete</Icon></a>
     </Col>
     </Row>
     </CollectionItem>
