@@ -11,22 +11,6 @@ export class Contacts extends React.Component {
     super(props);
     this.state = {
       contacts: [
-      {
-        "id": 1,
-        "firstName" : "John",
-        "lastName" : "Doe",
-        "email": "johndoe@something.com",
-        "phoneNumber": "1111111111",
-        "status": "active"
-      },
-      {
-        "id": 2,
-        "firstName" : "Alice",
-        "lastName" : "James",
-        "email": "alicejames@something.com",
-        "phoneNumber": "1122233669",
-        "status": "active"
-      }
     ],
     contact: {},
     mode: ""
@@ -36,6 +20,16 @@ export class Contacts extends React.Component {
     this.contactChangeHandler = this.contactChangeHandler.bind(this);
     this.updateContactProperty = this.updateContactProperty.bind(this);
     this.setContactForEdit = this.setContactForEdit.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("this.props: ", this.props);
+    this.props.getContacts();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("nextProps: ", nextProps);
+    this.setState({contacts: nextProps.contacts})
   }
 
   setContactForEdit(contact, mode) {
