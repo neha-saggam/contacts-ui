@@ -47,7 +47,6 @@ npm run test
 
 I am keeping following tasks open, as they are trivial and if someone wants to contribute these are good way to start.
 
-- Add validation to input fields
 - Use Radio buttons for *Status* field
 - Add multiple delete feature
 
