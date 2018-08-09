@@ -18,8 +18,8 @@ render() {
       header={this.props.mode}
       actions={
         <div>
-        <Button flat modal="close" waves="light">Close</Button>
-        <Button flat modal="close" waves="light"disabled={!this.props.isFormValid(this.props.errors)} onClick={(e) => this.props.contactChangeHandler(e, contact, mode)}>Save</Button>
+        <Button id="closeButton" flat modal="close" waves="light">Close</Button>
+        <Button id="saveButton" flat modal="close" waves="light" disabled={!this.props.isFormValid(this.props.errors)} onClick={(e) => this.props.contactChangeHandler(e, contact, mode)}>Save</Button>
         </div>
       }>
       <Row>

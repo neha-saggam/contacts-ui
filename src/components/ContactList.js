@@ -20,7 +20,7 @@ export function ContactList(props) {
       {contact.status }
     </Col>
     <Col s={1}>
-    <a onClick={(e) => {
+    <a id={"openModal"+contact.firstName} onClick={(e) => {
       setContactForEdit(contact, mode);
       $('#addEditContactModal').modal('open')
     }}>
