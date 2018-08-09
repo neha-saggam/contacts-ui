@@ -5,7 +5,36 @@ import {EDIT, ADD} from "../utils/constants";
 import AddEditContactModal from "./AddEditContactModal";
 import {ContactList} from './ContactList';
 
-export class Contacts extends React.Component {
+function extend(obj, src) {
+  for (var key in src) {
+      if (src.hasOwnProperty(key)) obj[key] = src[key];
+  }
+  return obj;
+}
+
+function isFormValid(errors) {
+  console.log("errors: ", errors);
+  for (var key in errors) {
+    if(errors[key].length != 0) {
+      return false;
+    }
+}
+  return true;
+}
+
+function convertKeyToLabel(text) {
+  var result = text.replace( /([A-Z])/g, " $1" );
+  var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+  return finalResult;
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
+export default class Contacts extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +42,8 @@ export class Contacts extends React.Component {
       contacts: [
     ],
     contact: {},
-    mode: ""
+    mode: "",
+    errors: {}
     }
 
     this.deleteContact = this.deleteContact.bind(this);
@@ -40,6 +70,48 @@ export class Contacts extends React.Component {
   }
 
   updateContactProperty(attribute, value) {
+    let error = {};
+    if(value.length == 0) {
+      error[attribute] = convertKeyToLabel(attribute) + " cannot be empty.";
+      console.log("error: ", error);
+      let merged = extend(this.state.errors, error);
+      this.setState({ errors: merged });
+    }
+    else {
+      error[attribute] = "";
+      let merged = extend(this.state.errors, error);
+      this.setState({ errors: merged })
+    }
+
+    if(attribute == "email") {
+      if (validateEmail(value)) {
+        error[attribute] = "";
+        let merged = extend(this.state.errors, error);
+        this.setState({ errors: merged })
+      }
+      else {
+        error[attribute] = error[attribute] + " " + convertKeyToLabel(attribute) + " is invalid.";
+        console.log("error: ", error);
+        let merged = extend(this.state.errors, error);
+        this.setState({ errors: merged });
+      }
+    }
+
+    if(attribute == "phoneNumber") {
+      if (value.length != 10) {
+        error[attribute] = error[attribute] + " " + convertKeyToLabel(attribute) + " is invalid.";
+        console.log("error: ", error);
+        let merged = extend(this.state.errors, error);
+        this.setState({ errors: merged });
+
+      }
+      else {
+        error[attribute] = "";
+        let merged = extend(this.state.errors, error);
+        this.setState({ errors: merged });
+      }
+    }
+
     let updatedContact = this.state.contact;
     updatedContact[attribute] = value;
     this.setState({contact: updatedContact});
@@ -69,6 +141,7 @@ export class Contacts extends React.Component {
   }
 
 render() {
+  console.log("errors: ", this.state.errors);
   return (
     <div>
       <Row>
@@ -86,6 +159,8 @@ render() {
         contact={this.state.contact}
         contactChangeHandler={this.contactChangeHandler}
         updateContactProperty={this.updateContactProperty}
+        errors={this.state.errors}
+        isFormValid={isFormValid}
       >
       </AddEditContactModal>
   </div>
