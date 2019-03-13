@@ -10,7 +10,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("getContacts: ", getContacts);
   return bindActionCreators({
         getContacts: getContacts
     }, dispatch);
