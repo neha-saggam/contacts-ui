@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Collection, CollectionItem, Icon, Col, Row, Modal, Button, Input} from 'react-materialize';
 import { NavBar } from './components/NavBar';
 import { Contacts } from './components/Contacts';
 import { Provider } from 'react-redux' //← Bridge React and Redux
@@ -18,7 +17,7 @@ class Index extends React.Component {
       <Provider store={store}>
         <div>
         <NavBar />
-        <div className="content">
+        <div className="container content">
         <ContactsContainer />
         </div>
         </div>
@@ -27,4 +26,5 @@ class Index extends React.Component {
 }
 }
 
-  ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.render(<Index />, document.getElementById("index"));
+module.hot.accept();

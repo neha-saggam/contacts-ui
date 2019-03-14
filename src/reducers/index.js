@@ -24,7 +24,7 @@
 const initialState = {
   contacts: [],
   completed: false
-}
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
         ...state,
         contacts: action.payload,
         completed: true
-      }
+      };
 
     case 'FETCH_CONTACTS_FAILURE':
       return {
