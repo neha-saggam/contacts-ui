@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getContacts } from '../actions/contacts_actions';
 import { bindActionCreators } from 'redux';
+import { getContacts } from '../actions/contacts_actions';
 import Contacts from '../components/Contacts';
 
 function mapStateToProps(state) {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   console.log("getContacts: ", getContacts);
   return bindActionCreators({
-        getContacts: getContacts
+        getContacts
     }, dispatch);
 }
 

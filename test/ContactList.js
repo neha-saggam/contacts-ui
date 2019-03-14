@@ -1,20 +1,19 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
-import { ContactList } from "../src/components/ContactList";
-import { configure } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import List from "../src/components/shared/List";
 
 configure({ adapter: new Adapter() });
 
-function setContactForEdit(contact, mode) {
+function setContactForEdit() {
 
 }
 function deleteContact() {
 
 }
 
-describe('<ContactList>', function() {
-  let contacts= [
+describe('<List>', function() {
+  const contacts= [
         {
           "id": 1,
           "firstName" : "John",
@@ -32,11 +31,9 @@ describe('<ContactList>', function() {
           "status": "active"
         }
       ]
-      let mode= "Add";
-      let setContactForEdit=setContactForEdit;
-      let deleteContact= deleteContact;
+      const mode= "Add";
 
-  const wrapper = shallow(<ContactList contacts={contacts} mode={mode} setContactForEdit={setContactForEdit} deleteContact={deleteContact} />);
+  const wrapper = shallow(<List collection={contacts} mode={mode} setContactForEdit={setContactForEdit} deleteContact={deleteContact} />);
 
   it("always renders a Collection", () => {
   const collection = wrapper.find("Collection");
@@ -47,17 +44,4 @@ describe('<ContactList>', function() {
     expect(wrapper.find('a').length).to.be.equal(4);
     expect(wrapper.find('Row').length).to.be.equal(3);
   });
-
-  // it('Test button click', function() {
-  //   wrapper.find('#openModalJohn').simulate('click');
-  //   expect(wrapper.find('#addEditContactModal').hasClass('open')).to.equal(true);
-  // });
-
-  //
-  // it('Test State after button click', function() {
-  //   wrapper.find('button').simulate('click');
-  //
-  //   expect(wrapper.state().data).toBe('Data updated...');
-  //   expect(wrapper.state('data')).toBe('Data updated...');
-  // });
 });
